@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/form/form';
+import Name from './components/name/name';
+import './styles.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Chance',
+      count: 0,
+    };
+  }
+
+  handleNameChange = (newName) => {
+    this.setState((previousState) => {
+      return {
+        name: newName,
+        count: previousState.count + 1,
+      };
+    });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <Name name={this.state.name} count={this.state.count} />
+        <Form handleNameChange={this.handleNameChange} name={this.state.name} count={this.state.count} />
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
